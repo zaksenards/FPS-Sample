@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://kdbka1vmjngw"]
+
+[ext_resource type="Script" path="res://src/player.gd" id="1_s02ux"]
+[ext_resource type="PackedScene" uid="uid://bppr22icxu2lt" path="res://assets/p250/p250.glb" id="2_jx6hc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dhmw0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x4xen"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_s02ux")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.1, 0)
+
+[node name="collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dhmw0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+far = 100.0
+
+[node name="gun" parent="." instance=ExtResource("2_jx6hc")]
+transform = Transform3D(0.492404, 0, 0.0868241, 0, 0.5, 0, -0.0868241, 0, 0.492404, -0.941, 1.906, -1.509)
+
+[node name="shootSpot" type="Marker3D" parent="gun"]
+transform = Transform3D(1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, 1, 0, 0.5, -1.5)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_x4xen")
